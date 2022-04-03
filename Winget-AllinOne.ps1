@@ -22,11 +22,11 @@ function Get-GithubRepository {
     New-Item $ZipFile -ItemType File -Force | Out-Null
 
     # Download the zip 
-    Write-Host 'Downloading $Url'
+    Write-Host "Downloading $Url"
     Invoke-RestMethod -Uri $Url -OutFile $ZipFile
 
     # Extract Zip File
-    Write-Host 'Unzipping the GitHub Repository locally'
+    Write-Host "Unzipping the GitHub Repository locally"
     Expand-Archive -Path $ZipFile -DestinationPath $Location -Force
     Get-ChildItem -Path $Location -Recurse | Unblock-File
      
