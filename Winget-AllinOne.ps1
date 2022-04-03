@@ -21,16 +21,14 @@ function Get-GithubRepository {
     $ZipFile = "$Location\temp.zip"
     New-Item $ZipFile -ItemType File -Force | Out-Null
 
-    # download the zip 
-    Write-Host 'Starting downloading the GitHub Repository'
+    # Download the zip 
+    Write-Host 'Downloading $Url'
     Invoke-RestMethod -Uri $Url -OutFile $ZipFile
-    Write-Host 'Download finished'
- 
-    #Extract Zip File
-    Write-Host 'Starting unzipping the GitHub Repository locally'
+
+    # Extract Zip File
+    Write-Host 'Unzipping the GitHub Repository locally'
     Expand-Archive -Path $ZipFile -DestinationPath $Location -Force
     Get-ChildItem -Path $Location -Recurse | Unblock-File
-    Write-Host 'Unzip finished'
      
     # remove the zip file
     Remove-Item -Path $ZipFile -Force
@@ -124,14 +122,16 @@ function Get-ExcludedApps{
 
 <# MAIN #>
 
-Write-host "###################################"
-Write-host "#                                 #"
-Write-host "#         Winget AllinOne         #"
-Write-host "#                                 #"
-Write-host "###################################`n"
+Write-Host "`n"
+Write-Host "`t###################################"
+Write-Host "`t#                                 #"
+Write-Host "`t#         Winget AllinOne         #"
+Write-Host "`t#                                 #"
+Write-Host "`t###################################"
+Write-Host "`n"
 
 #Temp folder
-$Location = "$env:ProgramData\Winget"
+$Location = "$env:ProgramData\WingetAiO_Temp"
 
 #Download Winget-AutoUpdate
 Get-GithubRepository "https://github.com/Romanitho/Winget-AutoUpdate/archive/refs/heads/main.zip" $Location
