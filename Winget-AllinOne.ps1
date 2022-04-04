@@ -37,8 +37,7 @@ function Get-GithubRepository {
 function Get-WingetStatus{
     Write-Host -ForegroundColor yellow "Checking prerequisites."
     $hasAppInstaller = Get-AppXPackage -Name 'Microsoft.DesktopAppInstaller'
-    $hasWingetSource = Get-AppxPackage -Name 'Microsoft.Winget.Source'
-    if ($hasAppInstaller -and $hasWingetSource){
+    if ($hasAppInstaller){
         Write-Host -ForegroundColor Green "WinGet is already installed."
     }
     else {
@@ -68,8 +67,7 @@ function Get-WingetStatus{
         Add-AppxPackage -Path https://aka.ms/getwinget
 
         $hasAppInstaller = Get-AppXPackage -name 'Microsoft.DesktopAppInstaller'
-        $hasWingetSource = Get-AppxPackage -Name 'Microsoft.Winget.Source'
-        if ($hasAppInstaller -and $hasWingetSource){
+        if ($hasAppInstaller){
             Write-Host -ForegroundColor Green "WinGet successfully installed."
         }
         else{
