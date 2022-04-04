@@ -131,14 +131,14 @@ Write-Host "`n"
 #Temp folder
 $Location = "$env:ProgramData\WingetAiO_Temp"
 
+#Check if Winget is installed, and install if not
+Get-WingetStatus
+
 #Download Winget-AutoUpdate
 Get-GithubRepository "https://github.com/Romanitho/Winget-AutoUpdate/archive/refs/heads/main.zip" $Location
 
 #Download Winget-Install
 Get-GithubRepository "https://github.com/Romanitho/Winget-Install/archive/refs/heads/main.zip" $Location
-
-#Check if Winget is installed, and install if not
-Get-WingetStatus
 
 #Get App List
 $AppToInstall = Get-AppList
