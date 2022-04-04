@@ -99,10 +99,12 @@ function Get-WingetCmd {
 function Get-AppList{
     #Get specific list
     if (Test-Path "$PSScriptRoot\apps_to_install.txt"){
+        Write-Host "Will install apps from 'apps_to_install.txt' file" -ForegroundColor Magenta
         $AppList = Get-Content -Path "$PSScriptRoot\apps_to_install.txt" |  Where-Object { $_ }
     }
     #Or get default list from github
     else{
+        Write-Host "Application selection from list..." -ForegroundColor Magenta
         $AppList = (Invoke-WebRequest "https://raw.githubusercontent.com/Romanitho/Winget-AllinOne/main/online/default_list.txt" -UseBasicParsing).content -split "`n" | Where-Object {$_} | Out-GridView -PassThru -Title "Select apps to install"
     }
     return $AppList -join ","
