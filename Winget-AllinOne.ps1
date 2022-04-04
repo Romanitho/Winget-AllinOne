@@ -35,7 +35,7 @@ function Get-GithubRepository {
 }
 
 function Get-WingetStatus{
-    Write-Host -ForegroundColor yellow "Checking prerequisites."
+    Write-Host -ForegroundColor yellow "Checking prerequisites..."
     $hasAppInstaller = Get-AppXPackage -Name 'Microsoft.DesktopAppInstaller'
     if ($hasAppInstaller){
         Write-Host -ForegroundColor Green "WinGet is already installed."
@@ -140,29 +140,32 @@ $AppToInstall = Get-AppList
 
 #Download and install Winget-AutoUpdate if not installed
 if(Test-Path "$env:ProgramData\Winget-AutoUpdate\config\about.xml"){
-    Write-Host "Winget-AutoUpdate already installed!"
+    Write-Host "Winget-AutoUpdate already installed!" -ForegroundColor Cyan
 }
 else{
+    Write-Host "Installing Winget-AutoUpdate..." -ForegroundColor Yellow
+
     #Download Winget-AutoUpdate
     Get-GithubRepository "https://github.com/Romanitho/Winget-AutoUpdate/archive/refs/heads/main.zip" $Location
 
     #Install Winget-Autoupdate
-    Write-Host 'Installing Winget-AutoUpdate...'
     Start-Process "powershell.exe" -Argument "-executionpolicy bypass -Windowstyle Minimized -file `"$Location\Winget-AutoUpdate-main\Winget-AutoUpdate-Install.ps1`" -Silent -DoNotUpdate" -Wait
+    Write-Host "Winget-AutoUpdate installed!" -ForegroundColor Green
 }
+
+Write-Host "Running Winget-Install..." -ForegroundColor Yellow
 
 #Download Winget-Install
 Get-GithubRepository "https://github.com/Romanitho/Winget-Install/archive/refs/heads/main.zip" $Location
 
 #Run Winget-Install
-Write-Host 'Running Winget-Install...'
 Start-Process "powershell.exe" -Argument "-executionpolicy bypass -Windowstyle Maximized -command `"$Location\Winget-Install-main\winget-install.ps1 -AppIDs $AppToInstall`"" -Wait
 
 #Configure ExcludedApps
 Get-ExcludedApps
 
 #Run WAU
-Write-Host "Running Winget-AutoUpdate"
+Write-Host "Running Winget-AutoUpdate..." -ForegroundColor Yellow
 Get-ScheduledTask -TaskName "Winget-AutoUpdate" -ErrorAction SilentlyContinue | Start-ScheduledTask -ErrorAction SilentlyContinue
 
 Remove-Item -Path $Location -Force -Recurse
