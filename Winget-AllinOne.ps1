@@ -77,20 +77,21 @@ function Get-WingetStatus{
 }
 
 function Get-WingetCmd {
-    #Get WinGet Location in User context
-    $WingetCmd = Get-Command winget.exe -ErrorAction SilentlyContinue
+    $WingetPath = (Resolve-Path "C:\Program Files\WindowsApps\Microsoft.DesktopAppInstaller_*_x64__8wekyb3d8bbwe").Path 
+    #Get Winget Location in User context
     if ($WingetCmd){
-        $Script:winget = $WingetCmd.Source
+        $Script:winget = (Get-Command winget.exe -ErrorAction SilentlyContinue).Source
     }
-    #Get WinGet Location in System context (WinGet < 1.17)
-    elseif (Test-Path "C:\Program Files\WindowsApps\Microsoft.DesktopAppInstaller_*_x64__8wekyb3d8bbwe\AppInstallerCLI.exe"){
-        $Script:winget = Resolve-Path "C:\Program Files\WindowsApps\Microsoft.DesktopAppInstaller_*_x64__8wekyb3d8bbwe\AppInstallerCLI.exe" | Select-Object -ExpandProperty Path
+    #Get Winget Location in System context (WinGet < 1.17)
+    elseif (Test-Path "$WingetPath\AppInstallerCLI.exe"){
+        $Script:winget = "$WingetPath\AppInstallerCLI.exe"
     }
-    #Get WinGet Location in System context (WinGet > 1.17)
-    elseif (Test-Path "C:\Program Files\WindowsApps\Microsoft.DesktopAppInstaller_*_x64__8wekyb3d8bbwe\winget.exe"){
-        $Script:winget = Resolve-Path "C:\Program Files\WindowsApps\Microsoft.DesktopAppInstaller_*_x64__8wekyb3d8bbwe\winget.exe" | Select-Object -ExpandProperty Path
+    #Get Winget Location in System context (WinGet > 1.17)
+    elseif (Test-Path "$WingetPath\winget.exe"){
+        $Script:winget = "$WingetPath\winget.exe"
     }
     else{
+        Write-Host -ForegroundColor Red "Winget not found!"
         break
     }
 }
@@ -134,18 +135,24 @@ $Location = "$env:ProgramData\WingetAiO_Temp"
 #Check if Winget is installed, and install if not
 Get-WingetStatus
 
-#Download Winget-AutoUpdate
-Get-GithubRepository "https://github.com/Romanitho/Winget-AutoUpdate/archive/refs/heads/main.zip" $Location
-
-#Download Winget-Install
-Get-GithubRepository "https://github.com/Romanitho/Winget-Install/archive/refs/heads/main.zip" $Location
-
 #Get App List
 $AppToInstall = Get-AppList
 
-#Install Winget-Autoupdate
-Write-Host 'Installing Winget-AutoUpdate...'
-Start-Process "powershell.exe" -Argument "-executionpolicy bypass -Windowstyle Minimized -file `"$Location\Winget-AutoUpdate-main\Winget-AutoUpdate-Install.ps1`" -Silent -DoNotUpdate" -Wait
+#Download and install Winget-AutoUpdate if not installed
+if(Test-Path "$env:ProgramData\Winget-AutoUpdate\config\about.xml"){
+    Write-Host "Winget-AutoUpdate already installed!"
+}
+else{
+    #Download Winget-AutoUpdate
+    Get-GithubRepository "https://github.com/Romanitho/Winget-AutoUpdate/archive/refs/heads/main.zip" $Location
+
+    #Install Winget-Autoupdate
+    Write-Host 'Installing Winget-AutoUpdate...'
+    Start-Process "powershell.exe" -Argument "-executionpolicy bypass -Windowstyle Minimized -file `"$Location\Winget-AutoUpdate-main\Winget-AutoUpdate-Install.ps1`" -Silent -DoNotUpdate" -Wait
+}
+
+#Download Winget-Install
+Get-GithubRepository "https://github.com/Romanitho/Winget-Install/archive/refs/heads/main.zip" $Location
 
 #Run Winget-Install
 Write-Host 'Running Winget-Install...'
