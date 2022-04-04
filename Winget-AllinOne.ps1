@@ -47,11 +47,11 @@ function Get-WingetStatus{
 
         #installing dependencies
         $ProgressPreference = 'SilentlyContinue'
-        if (Get-AppxPackage -Name 'Microsoft.iUI.Xaml.2.7'){
-            Write-Host -ForegroundColor Green "Prerequisite: Microsoft.iUI.Xaml.2.7 exists"
+        if (Get-AppxPackage -Name 'Microsoft.UI.Xaml.2.7'){
+            Write-Host -ForegroundColor Green "Prerequisite: Microsoft.UI.Xaml.2.7 exists"
         }
         else{
-            Write-Host -ForegroundColor Yellow "Prerequisite: Installing Microsoft.iUI.Xaml.2.7"
+            Write-Host -ForegroundColor Yellow "Prerequisite: Installing Microsoft.UI.Xaml.2.7"
             $UiXamlUrl = "https://www.nuget.org/api/v2/package/Microsoft.UI.Xaml/2.7.0"
             Invoke-RestMethod -Uri $UiXamlUrl -OutFile ".\Microsoft.UI.XAML.2.7.zip"
             Expand-Archive -Path ".\Microsoft.UI.XAML.2.7.zip" -DestinationPath ".\extracted" -Force
