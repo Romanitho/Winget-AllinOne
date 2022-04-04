@@ -37,8 +37,7 @@ function Get-GithubRepository {
 function Get-WingetStatus{
     Write-Host -ForegroundColor yellow "Checking prerequisites."
     $hasAppInstaller = Get-AppXPackage -Name 'Microsoft.DesktopAppInstaller'
-    $hasWingetSource = Get-AppxPackage -Name 'Microsoft.Winget.Source'
-    if ($hasAppInstaller -and $hasWingetSource){
+    if ($hasAppInstaller){
         Write-Host -ForegroundColor Green "WinGet is already installed."
     }
     else {
@@ -47,11 +46,11 @@ function Get-WingetStatus{
 
         #installing dependencies
         $ProgressPreference = 'SilentlyContinue'
-        if (Get-AppxPackage -Name 'Microsoft.iUI.Xaml.2.7'){
-            Write-Host -ForegroundColor Green "Prerequisite: Microsoft.iUI.Xaml.2.7 exists"
+        if (Get-AppxPackage -Name 'Microsoft.UI.Xaml.2.7'){
+            Write-Host -ForegroundColor Green "Prerequisite: Microsoft.UI.Xaml.2.7 exists"
         }
         else{
-            Write-Host -ForegroundColor Yellow "Prerequisite: Installing Microsoft.iUI.Xaml.2.7"
+            Write-Host -ForegroundColor Yellow "Prerequisite: Installing Microsoft.UI.Xaml.2.7"
             $UiXamlUrl = "https://www.nuget.org/api/v2/package/Microsoft.UI.Xaml/2.7.0"
             Invoke-RestMethod -Uri $UiXamlUrl -OutFile ".\Microsoft.UI.XAML.2.7.zip"
             Expand-Archive -Path ".\Microsoft.UI.XAML.2.7.zip" -DestinationPath ".\extracted" -Force
@@ -68,8 +67,7 @@ function Get-WingetStatus{
         Add-AppxPackage -Path https://aka.ms/getwinget
 
         $hasAppInstaller = Get-AppXPackage -name 'Microsoft.DesktopAppInstaller'
-        $hasWingetSource = Get-AppxPackage -Name 'Microsoft.Winget.Source'
-        if ($hasAppInstaller -and $hasWingetSource){
+        if ($hasAppInstaller){
             Write-Host -ForegroundColor Green "WinGet successfully installed."
         }
         else{
