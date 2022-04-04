@@ -7,13 +7,14 @@ All in one job based on
 - https://github.com/Romanitho/Winget-Install
 
 ## Install
+### - Offline with specific app lists
 - [Download projet](https://github.com/Romanitho/Winget-AllinOne/archive/refs/heads/main.zip) and extract.
 - Put the Winget Application IDs you want to install in bulk in "apps_to_install.txt" file.
 - Put the Winget Application IDs in "excluded_apps.txt" file to exclude them from daily upgrade job. By defaut, if this file is not present, it will use the default one from Winget-AutoUpgrade repo.
 - Then, run "install.bat"
 
-## Run from Powershell Directly
-Basically useful on fresh install :)
+### - Online from Powershell Directly
+Basically useful on fresh Windows install
 - Open Powershell as Admin
 - Run this command:
 
