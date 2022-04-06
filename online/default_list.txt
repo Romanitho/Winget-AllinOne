@@ -2,6 +2,8 @@
 Adobe.Acrobat.Reader.64-bit
 Bitwarden.Bitwarden
 DominikReichl.KeePass
+Git.Git
+GitHub.GitHubDesktop
 Google.Chrome
 Microsoft.Office
 Microsoft.VisualStudioCode
