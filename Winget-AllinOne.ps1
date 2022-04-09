@@ -148,20 +148,22 @@ else{
     Write-Host "Installing Winget-AutoUpdate..." -ForegroundColor Yellow
 
     #Download Winget-AutoUpdate
-    Get-GithubRepository "https://github.com/Romanitho/Winget-AutoUpdate/archive/refs/heads/main.zip" $Location
+    Get-GithubRepository "https://github.com/Romanitho/Winget-AutoUpdate/zipball/main/" $Location
 
     #Install Winget-Autoupdate
-    Start-Process "powershell.exe" -Argument "-executionpolicy bypass -Windowstyle Minimized -file `"$Location\Winget-AutoUpdate-main\Winget-AutoUpdate-Install.ps1`" -Silent -DoNotUpdate" -Wait
+    $WAUInstallFile = (Resolve-Path "$Location\*Winget-AutoUpdate*\Winget-AutoUpdate-Install.ps1").Path
+    Start-Process "powershell.exe" -Argument "-ExecutionPolicy Bypass -WindowStyle Minimized -Command `"$WAUInstallFile -Silent -DoNotUpdate`"" -Wait
     Write-Host "Winget-AutoUpdate installed!" -ForegroundColor Green
 }
 
 Write-Host "Running Winget-Install..." -ForegroundColor Yellow
 
 #Download Winget-Install
-Get-GithubRepository "https://github.com/Romanitho/Winget-Install/archive/refs/heads/main.zip" $Location
+Get-GithubRepository "https://github.com/Romanitho/Winget-Install/zipball/main/" $Location
 
 #Run Winget-Install
-Start-Process "powershell.exe" -Argument "-executionpolicy bypass -Windowstyle Maximized -command `"$Location\Winget-Install-main\winget-install.ps1 -AppIDs $AppToInstall`"" -Wait
+$InstallFile = (Resolve-Path "$Location\*Winget-Install*\winget-install.ps1").Path
+Start-Process "powershell.exe" -Argument "-ExecutionPolicy Bypass -WindowStyle Maximized -Command `"$InstallFile -AppIDs $AppToInstall`"" -Wait
 
 #Configure ExcludedApps
 Get-ExcludedApps
