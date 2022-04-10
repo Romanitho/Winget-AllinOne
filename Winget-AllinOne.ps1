@@ -3,8 +3,10 @@
 Install apps with Winget-Install and configure Winget-AutoUpdate
 
 .DESCRIPTION
-Install apps with Winget from a list file (apps.txt).
-Install Winget-AutoUpdate to get apps daily updated
+This script will:
+ - Install Winget if not present
+ - Install apps with Winget from a custom list file (apps.txt) or directly from popped up default list.
+ - Install Winget-AutoUpdate to get apps daily updated
 https://github.com/Romanitho/Winget-AllinOne
 #>
 
