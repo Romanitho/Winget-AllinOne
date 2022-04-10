@@ -24,11 +24,11 @@ function Get-GithubRepository {
     New-Item $ZipFile -ItemType File -Force | Out-Null
 
     # Download the zip 
-    Write-Host "Downloading $Url"
+    Write-Host "-> Downloading $Url"
     Invoke-RestMethod -Uri $Url -OutFile $ZipFile
 
     # Extract Zip File
-    Write-Host "Unzipping the GitHub Repository locally"
+    Write-Host "-> Unzipping the GitHub Repository locally"
     Expand-Archive -Path $ZipFile -DestinationPath $Location -Force
     Get-ChildItem -Path $Location -Recurse | Unblock-File
      
@@ -44,15 +44,15 @@ function Get-WingetStatus{
     }
     else {
         Write-Host -ForegroundColor Red "WinGet missing."
-        Write-Host -ForegroundColor Yellow "Installing WinGet prerequisites..."
+        Write-Host -ForegroundColor Yellow "-> Installing WinGet prerequisites..."
 
         #installing dependencies
         $ProgressPreference = 'SilentlyContinue'
         if (Get-AppxPackage -Name 'Microsoft.UI.Xaml.2.7'){
-            Write-Host -ForegroundColor Green "Prerequisite: Microsoft.UI.Xaml.2.7 exists"
+            Write-Host -ForegroundColor Green "-> Prerequisite: Microsoft.UI.Xaml.2.7 exists"
         }
         else{
-            Write-Host -ForegroundColor Yellow "Prerequisite: Installing Microsoft.UI.Xaml.2.7"
+            Write-Host -ForegroundColor Yellow "-> Prerequisite: Installing Microsoft.UI.Xaml.2.7"
             $UiXamlUrl = "https://www.nuget.org/api/v2/package/Microsoft.UI.Xaml/2.7.0"
             Invoke-RestMethod -Uri $UiXamlUrl -OutFile ".\Microsoft.UI.XAML.2.7.zip"
             Expand-Archive -Path ".\Microsoft.UI.XAML.2.7.zip" -DestinationPath ".\extracted" -Force
@@ -61,11 +61,11 @@ function Get-WingetStatus{
             Remove-Item -Path ".\extracted" -Force -Recurse
         }
 
-        Write-Host -ForegroundColor Yellow "Prerequisite: Installing Microsoft.VCLibs.x64.14.00.Desktop"
+        Write-Host -ForegroundColor Yellow "-> Prerequisite: Installing Microsoft.VCLibs.x64.14.00.Desktop"
         Add-AppxPackage -Path https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx
 
         #installin Winget
-        Write-Host -ForegroundColor Yellow "Installing Winget..."
+        Write-Host -ForegroundColor Yellow "-> Installing Winget..."
         Add-AppxPackage -Path https://aka.ms/getwinget
 
         $hasAppInstaller = Get-AppXPackage -name 'Microsoft.DesktopAppInstaller'
@@ -132,19 +132,21 @@ Write-Host "`t#         Winget AllinOne         #"
 Write-Host "`t#                                 #"
 Write-Host "`t###################################"
 Write-Host "`n"
+Write-Host "###" -ForegroundColor Cyan
 
 #Temp folder
 $Location = "$env:ProgramData\WingetAiO_Temp"
 
 #Check if Winget is installed, and install if not
 Get-WingetStatus
+Write-Host "###" -ForegroundColor Cyan
 
 #Get App List
 $AppToInstall = Get-AppList
 
 #Download and install Winget-AutoUpdate if not installed
 if(Test-Path "$env:ProgramData\Winget-AutoUpdate\config\about.xml"){
-    Write-Host "Winget-AutoUpdate already installed!" -ForegroundColor Cyan
+    Write-Host "Winget-AutoUpdate already installed!" -ForegroundColor Green
 }
 else{
     Write-Host "Installing Winget-AutoUpdate..." -ForegroundColor Yellow
@@ -158,6 +160,7 @@ else{
     Write-Host "Winget-AutoUpdate installed!" -ForegroundColor Green
 }
 
+Write-Host "###" -ForegroundColor Cyan
 Write-Host "Running Winget-Install..." -ForegroundColor Yellow
 
 #Download Winget-Install
@@ -169,11 +172,14 @@ Start-Process "powershell.exe" -Argument "-ExecutionPolicy Bypass -WindowStyle M
 
 #Configure ExcludedApps
 Get-ExcludedApps
+Write-Host "###" -ForegroundColor Cyan
 
 #Run WAU
 Write-Host "Running Winget-AutoUpdate..." -ForegroundColor Yellow
 Get-ScheduledTask -TaskName "Winget-AutoUpdate" -ErrorAction SilentlyContinue | Start-ScheduledTask -ErrorAction SilentlyContinue
 
 Remove-Item -Path $Location -Force -Recurse
-Write-Host "End." -ForegroundColor Cyan
+Write-Host "###" -ForegroundColor Cyan
+Write-Host "Finished." -ForegroundColor Cyan
+Write-Host "###" -ForegroundColor Cyan
 Start-Sleep 3
