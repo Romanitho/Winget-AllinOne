@@ -22,6 +22,6 @@ Basically useful on fresh Windows install
 
 - Select Apps you want to install (Ctrl + click)
 
-![image](https://user-images.githubusercontent.com/96626929/159272707-a46884c3-46b2-4525-a3cb-3534faaccedc.png)
+![image](https://user-images.githubusercontent.com/96626929/162642474-322e3a22-2a7d-4b89-a016-f8377c4a9ce9.png)
 
 - Click OK
