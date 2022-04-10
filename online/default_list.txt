@@ -1,20 +1,30 @@
-7zip.7zip
-Adobe.Acrobat.Reader.64-bit
-Bitwarden.Bitwarden
-DominikReichl.KeePass
-Git.Git
-GitHub.GitHubDesktop
-Google.Chrome
-Microsoft.Office
-Microsoft.VisualStudioCode
-Mozilla.Firefox
-Mozilla.Firefox.ESR
-mRemoteNG.mRemoteNG
-Notepad++.Notepad++
-PuTTY.PuTTY
-ShareX.ShareX
-TeamViewer.TeamViewer
-TeamViewer.TeamViewer.Host
-TimKosse.FileZilla.Client
-VideoLAN.VLC
-WinSCP.WinSCP
+Name,AppID
+7-Zip,7zip.7zip
+Acrobat Reader DC,Adobe.Acrobat.Reader.64-bit
+Advanced IP Scanner,Famatech.AdvancedIPScanner
+Audacity,Audacity.Audacity
+Bitwarden,Bitwarden.Bitwarden
+FileZilla,TimKosse.FileZilla.Client
+Firefox,Mozilla.Firefox
+Firefox ESR,Mozilla.Firefox.ESR
+GIMP,GIMP.GIMP
+Git,Git.Git
+GitHub Desktop,GitHub.GitHubDesktop
+Google Chrome,Google.Chrome
+Google Drive,Google.Drive
+Greenshot,Greenshot.Greenshot
+Java 8,Oracle.JavaRuntimeEnvironment
+KeePass,DominikReichl.KeePass
+Microsoft Office,Microsoft.Office
+Microsoft Teams,Microsoft.Teams
+mRemoteNG,mRemoteNG.mRemoteNG
+Notepad++,Notepad++.Notepad++
+PuTTY,PuTTY.PuTTY
+ShareX,ShareX.ShareX
+TeamViewer,TeamViewer.TeamViewer
+TeamViewer Host,TeamViewer.TeamViewer.Host
+TreeSize Free,JAMSoftware.TreeSize.Free
+Visual Studio Code,Microsoft.VisualStudioCode
+VLC,VideoLAN.VLC
+WinSCP,WinSCP.WinSCP
+Wireshark,WiresharkFoundation.Wireshark

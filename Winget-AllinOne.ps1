@@ -107,7 +107,8 @@ function Get-AppList{
     #Or get default list from github
     else{
         Write-Host "Application selection from list..." -ForegroundColor Magenta
-        $AppList = (Invoke-WebRequest "https://raw.githubusercontent.com/Romanitho/Winget-AllinOne/main/online/default_list.txt" -UseBasicParsing).content -split "`n" | Where-Object {$_} | Out-GridView -PassThru -Title "Select apps to install"
+        $AppIDList = (Invoke-WebRequest "https://raw.githubusercontent.com/Romanitho/Winget-AllinOne/main/online/default_list.txt" -UseBasicParsing).content | ConvertFrom-Csv -Delimiter "," | Out-GridView -PassThru -Title "Select apps to install"
+        $AppList = $AppIDList.AppID
     }
     return $AppList -join ","
 }
