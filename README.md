@@ -15,10 +15,10 @@ All in one job based on
 
 ### - Online from Powershell Directly
 Basically useful on fresh Windows install
-- Open Powershell as Admin
+- Open Command Prompt as Admin
 - Run this command:
 
-`Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/Romanitho/Winget-AllinOne/main/Winget-AllinOne.ps1'))`
+`Powershell.exe Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/Romanitho/Winget-AllinOne/main/Winget-AllinOne.ps1'))`
 
 - Select Apps you want to install (Ctrl + click)
 
