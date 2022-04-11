@@ -157,7 +157,7 @@ else{
 
     #Install Winget-Autoupdate
     $WAUInstallFile = (Resolve-Path "$Location\*Winget-AutoUpdate*\Winget-AutoUpdate-Install.ps1").Path
-    Start-Process "powershell.exe" -Argument "-ExecutionPolicy Bypass -WindowStyle Minimized -Command `"$WAUInstallFile -Silent -DoNotUpdate`"" -Wait
+    Start-Process "powershell.exe" -Argument "-ExecutionPolicy Bypass -WindowStyle Minimized -Command `"$WAUInstallFile -Silent -DoNotUpdate`"" -Wait -Verb RunAs
     Write-Host "Winget-AutoUpdate installed!" -ForegroundColor Green
 }
 
@@ -177,7 +177,7 @@ Write-Host "###" -ForegroundColor Cyan
 
 #Run WAU
 Write-Host "Running Winget-AutoUpdate..." -ForegroundColor Yellow
-Get-ScheduledTask -TaskName "Winget-AutoUpdate" -ErrorAction SilentlyContinue | Start-ScheduledTask -ErrorAction SilentlyContinue
+Get-ScheduledTask -TaskName "Winget-AutoUpdate" -ErrorAction SilentlyContinue | Start-ScheduledTask -ErrorAction SilentlyContinue -Verb RunAs
 
 Remove-Item -Path $Location -Force -Recurse
 Write-Host "###" -ForegroundColor Cyan
