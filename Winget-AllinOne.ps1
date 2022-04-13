@@ -170,7 +170,7 @@ Get-GithubRepository "https://github.com/Romanitho/Winget-Install/zipball/main/"
 
 #Run Winget-Install
 $InstallFile = (Resolve-Path "$Location\*Winget-Install*\winget-install.ps1").Path
-Start-Process "powershell.exe" -Argument "-ExecutionPolicy Bypass -WindowStyle Maximized -Command `"$InstallFile -AppIDs $AppToInstall`"" -Wait
+Start-Process "powershell.exe" -Argument "-ExecutionPolicy Bypass -WindowStyle Maximized -Command `"$InstallFile -AppIDs $AppToInstall`"" -Wait -Verb RunAs
 
 #Configure ExcludedApps
 Get-ExcludedApps
@@ -178,7 +178,7 @@ Write-Host "###" -ForegroundColor Cyan
 
 #Run WAU
 Write-Host "Running Winget-AutoUpdate..." -ForegroundColor Yellow
-Get-ScheduledTask -TaskName "Winget-AutoUpdate" -ErrorAction SilentlyContinue | Start-ScheduledTask -ErrorAction SilentlyContinue -Verb RunAs
+Get-ScheduledTask -TaskName "Winget-AutoUpdate" -ErrorAction SilentlyContinue | Start-ScheduledTask -ErrorAction SilentlyContinue
 
 Remove-Item -Path $Location -Force -Recurse
 Write-Host "###" -ForegroundColor Cyan
