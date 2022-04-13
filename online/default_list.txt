@@ -13,7 +13,6 @@ GitHub Desktop,GitHub.GitHubDesktop
 Google Chrome,Google.Chrome
 Google Drive,Google.Drive
 Greenshot,Greenshot.Greenshot
-Java 8,Oracle.JavaRuntimeEnvironment
 KeePass,DominikReichl.KeePass
 Microsoft Office,Microsoft.Office
 Microsoft Teams,Microsoft.Teams
