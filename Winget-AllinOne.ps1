@@ -79,26 +79,6 @@ function Get-WingetStatus{
     }
 }
 
-function Get-WingetCmd {
-    $WingetPath = (Resolve-Path "C:\Program Files\WindowsApps\Microsoft.DesktopAppInstaller_*_x64__8wekyb3d8bbwe").Path 
-    #Get Winget Location in User context
-    if ($WingetCmd){
-        $Script:winget = (Get-Command winget.exe -ErrorAction SilentlyContinue).Source
-    }
-    #Get Winget Location in System context (WinGet < 1.17)
-    elseif (Test-Path "$WingetPath\AppInstallerCLI.exe"){
-        $Script:winget = "$WingetPath\AppInstallerCLI.exe"
-    }
-    #Get Winget Location in System context (WinGet > 1.17)
-    elseif (Test-Path "$WingetPath\winget.exe"){
-        $Script:winget = "$WingetPath\winget.exe"
-    }
-    else{
-        Write-Host -ForegroundColor Red "Winget not found!"
-        break
-    }
-}
-
 function Get-AppList{
     #Get specific list
     if (Test-Path "$PSScriptRoot\apps_to_install.txt"){
