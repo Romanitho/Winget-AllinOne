@@ -39,7 +39,7 @@ function Get-GithubRepository {
 function Get-WingetStatus{
     Write-Host -ForegroundColor yellow "Checking prerequisites..."
     $hasAppInstaller = Get-AppXPackage -Name 'Microsoft.DesktopAppInstaller'
-    [Version]$AppInstallerVers = $hasAppInstallerr.version
+    [Version]$AppInstallerVers = $hasAppInstaller.version
     if ($AppInstallerVers -gt 1.16.0.0){
         Write-Host -ForegroundColor Green "WinGet is already installed."
     }
