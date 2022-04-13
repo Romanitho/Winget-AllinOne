@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
 Install apps with Winget-Install and configure Winget-AutoUpdate
 
@@ -39,7 +39,8 @@ function Get-GithubRepository {
 function Get-WingetStatus{
     Write-Host -ForegroundColor yellow "Checking prerequisites..."
     $hasAppInstaller = Get-AppXPackage -Name 'Microsoft.DesktopAppInstaller'
-    if ($hasAppInstaller){
+    [Version]$AppInstallerVers = $hasAppInstallerr.version
+    if ($AppInstallerVers -gt 1.16.0.0){
         Write-Host -ForegroundColor Green "WinGet is already installed."
     }
     else {
