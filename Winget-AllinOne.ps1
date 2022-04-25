@@ -67,7 +67,7 @@ function Get-WingetStatus{
 
         #installin Winget
         Write-Host -ForegroundColor Yellow "-> Installing Winget..."
-        Add-AppxPackage -Path https://aka.ms/getwinget
+        Add-AppxPackage -Path https://github.com/microsoft/winget-cli/releases/download/v1.3.431/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
 
 
         $hasAppInstaller = Get-AppXPackage -Name 'Microsoft.DesktopAppInstaller'
@@ -164,6 +164,6 @@ Get-ScheduledTask -TaskName "Winget-AutoUpdate" -ErrorAction SilentlyContinue | 
 
 Remove-Item -Path $Location -Force -Recurse
 Write-Host "###" -ForegroundColor Cyan
-Write-Host "Finished." -ForegroundColor Cyan
+Write-Host "Finished." -ForegroundColor Green
 Write-Host "###" -ForegroundColor Cyan
 Start-Sleep 3
