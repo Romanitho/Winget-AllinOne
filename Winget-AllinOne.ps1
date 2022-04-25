@@ -136,7 +136,7 @@ else{
     Write-Host "Installing Winget-AutoUpdate..." -ForegroundColor Yellow
 
     #Download Winget-AutoUpdate
-    Get-GithubRepository "https://github.com/Romanitho/Winget-AutoUpdate/zipball/main/" $Location
+    Get-GithubRepository "https://github.com/Romanitho/Winget-AutoUpdate/archive/refs/tags/v1.8.0.zip" $Location
 
     #Install Winget-Autoupdate
     $WAUInstallFile = (Resolve-Path "$Location\*Winget-AutoUpdate*\Winget-AutoUpdate-Install.ps1").Path
@@ -148,7 +148,7 @@ Write-Host "###" -ForegroundColor Cyan
 Write-Host "Running Winget-Install..." -ForegroundColor Yellow
 
 #Download Winget-Install
-Get-GithubRepository "https://github.com/Romanitho/Winget-Install/zipball/main/" $Location
+Get-GithubRepository "https://github.com/Romanitho/Winget-Install/archive/refs/tags/v1.5.0.zip" $Location
 
 #Run Winget-Install
 $InstallFile = (Resolve-Path "$Location\*Winget-Install*\winget-install.ps1").Path
