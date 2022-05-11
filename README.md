@@ -1,6 +1,7 @@
 # Winget-AllinOne
 Install apps one shot + Winget-AutoUpdate
-> Will soon no longer be maintained as replaced by WiGui
+> Not maintained anymore as replaced by WiGui
+> https://github.com/Romanitho/Winget-Install-GUI
 
 ## Info
 All in one job based on
